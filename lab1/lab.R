@@ -12,3 +12,6 @@ plot(mpg, acceleration, xlab = "mpg", ylab = "acceleration", title("Link: \"http
 #correlation coefficient
 r <- cor(mpg, acceleration)
 
+#linear regression
+abline(lm(acceleration ~ mpg))
+
