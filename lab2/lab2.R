@@ -21,4 +21,4 @@ D_acceleration <- var(acceleration)
 Fisher <- var.test(mpg, acceleration, conf.level = confidential_interval)
 
 # Критерий Стьюдента
-t <- t.test(mpg, acceleration)
+t <- t.test(mpg, acceleration, conf.level = confidential_interval)
