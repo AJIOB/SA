@@ -7,7 +7,7 @@ confidential_interval = 0.95
 data <- read.table("input.data", sep = "" , header = F, na.strings ="", stringsAsFactors= F)
 
 mpg <- data[, 1]
-acceleration <- data[, 6]
+acceleration <- data[, 4]
 
 # mathematical expectation
 M_mpg <- mean(mpg)
