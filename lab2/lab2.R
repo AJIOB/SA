@@ -17,8 +17,12 @@ M_acceleration <- mean(acceleration)
 D_mpg <- var(mpg)
 D_acceleration <- var(acceleration)
 
+# quantiles
+quantile(replicate(length(mpg), mean(sample(mpg, rep=TRUE))), c(1 - confidential_interval, confidential_interval))
+quantile(replicate(length(acceleration), mean(sample(acceleration, rep=TRUE))), c(1 - confidential_interval, confidential_interval))
+
 # Критерий Фишера
-Fisher <- var.test(mpg, acceleration, conf.level = confidential_interval)
+var.test(mpg, acceleration, conf.level = confidential_interval)
 
 # Критерий Стьюдента
-t <- t.test(mpg, acceleration, conf.level = confidential_interval)
+t.test(mpg, acceleration, conf.level = confidential_interval)
