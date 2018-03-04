@@ -44,6 +44,8 @@ main_calc <- function(image_num, histogram_res) {
   message("Image ", image_num, " mode = ", sort(unique(hist_y))[which.max(hist_y.t)])
 }
 
+message("Made by AJIOB, 2018")
+
 conv1 <- img_convertion(1, img1_path)
 main_calc(1, conv1$hist)
 conv2 <- img_convertion(2, img2_path)
