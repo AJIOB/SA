@@ -17,23 +17,32 @@ customShow <- function(img, title){
   plot(img, main = title)
 }
 
-img1_color <- load.image(img1_path)
-customShow(img1_color, "Image 1: color")
-img1_gray <- grayscale(img1_color)
-customShow(img1_gray, "Image 1: grayscale")
+img_convertion <- function(image_num, img_path) {
+  img_color <- load.image(img_path)
+  customShow(img_color, sprintf("Image %d: color", image_num))
+  img_gray <- grayscale(img_color)
+  customShow(img_gray, sprintf("Image %d: grayscale", image_num))
+  
+  # Histogram
+  img_gray_scaled <- img_gray * jpegValueScale ^ 2
+  histogram_res <- 
+    hist(img_gray_scaled, main=sprintf("Grayscale histogram of image %d", image_num), 
+         xlab = "", xlim = c(0, jpegValueScale),
+         breaks = seq(0, jpegValueScale + histogramStep, by=histogramStep))
+}
 
-# Histogram
-img1_gray_scaled <- img1_gray * jpegValueScale ^ 2
-histogram1_res <- 
-  hist(img1_gray_scaled, main="Grayscale histogram of image 1", 
-     xlab = "", xlim = c(0, jpegValueScale),
-     breaks = seq(0, jpegValueScale + histogramStep, by=histogramStep))
+main_calc <- function(image_num, histogram_res) {
+  #hist_x <- histogram_res$breaks
+  hist_y <- histogram_res$counts
+  
+  message("Image ", image_num, " mean = ", mean(hist_y))
+  message("Image ", image_num, " square derivation = ", sd(hist_y))
+  message("Image ", image_num, " median = ", median(hist_y))
+  hist_y.t <- table(hist_y)
+  message("Image ", image_num, " mode = ", sort(unique(hist_y))[which.max(hist_y.t)])
+}
 
-hist1_x <- histogram1_res$breaks
-hist1_y <- histogram1_res$counts
-
-message("Image 1 mean = ", mean(hist1_y))
-message("Image 1 square derivation = ", sd(hist1_y))
-message("Image 1 median = ", median(hist1_y))
-hist1_y.t <- table(hist1_y)
-message("Image 1 mode = ", sort(unique(hist1_y))[which.max(hist1_y.t)])
+histogram1_res <- img_convertion(1, img1_path)
+main_calc(1, histogram1_res)
+histogram2_res <- img_convertion(2, img2_path)
+main_calc(2, histogram2_res)
