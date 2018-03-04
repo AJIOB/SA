@@ -22,7 +22,18 @@ customShow(img1_color, "Image 1: color")
 img1_gray <- grayscale(img1_color)
 customShow(img1_gray, "Image 1: grayscale")
 
+# Histogram
 img1_gray_scaled <- img1_gray * jpegValueScale ^ 2
-hist(img1_gray_scaled, main="Grayscale histogram of image 1", 
+histogram1_res <- 
+  hist(img1_gray_scaled, main="Grayscale histogram of image 1", 
      xlab = "", xlim = c(0, jpegValueScale),
      breaks = seq(0, jpegValueScale + histogramStep, by=histogramStep))
+
+hist1_x <- histogram1_res$breaks
+hist1_y <- histogram1_res$counts
+
+message("Image 1 mean = ", mean(hist1_y))
+message("Image 1 square derivation = ", sd(hist1_y))
+message("Image 1 median = ", median(hist1_y))
+hist1_y.t <- table(hist1_y)
+message("Image 1 mode = ", sort(unique(hist1_y))[which.max(hist1_y.t)])
