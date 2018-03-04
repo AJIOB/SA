@@ -29,6 +29,8 @@ img_convertion <- function(image_num, img_path) {
     hist(img_gray_scaled, main=sprintf("Grayscale histogram of image %d", image_num), 
          xlab = "", xlim = c(0, jpegValueScale),
          breaks = seq(0, jpegValueScale + histogramStep, by=histogramStep))
+  
+  list(gray = img_gray_scaled, hist = histogram_res)
 }
 
 main_calc <- function(image_num, histogram_res) {
@@ -42,7 +44,10 @@ main_calc <- function(image_num, histogram_res) {
   message("Image ", image_num, " mode = ", sort(unique(hist_y))[which.max(hist_y.t)])
 }
 
-histogram1_res <- img_convertion(1, img1_path)
-main_calc(1, histogram1_res)
-histogram2_res <- img_convertion(2, img2_path)
-main_calc(2, histogram2_res)
+conv1 <- img_convertion(1, img1_path)
+main_calc(1, conv1$hist)
+conv2 <- img_convertion(2, img2_path)
+main_calc(2, conv2$hist)
+
+message("Histogram correlation = ", cor(conv1$hist$counts, conv2$hist$counts))
+message("Grayscale image correlation = ", cor(conv1$gray, conv2$gray))
