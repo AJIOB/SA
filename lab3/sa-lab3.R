@@ -51,3 +51,19 @@ main_calc(2, conv2$hist)
 
 message("Histogram correlation = ", cor(conv1$hist$counts, conv2$hist$counts))
 message("Grayscale image correlation = ", cor(conv1$gray, conv2$gray))
+
+chi_test <- function(dots) {
+  interval <- dots$hist$breaks
+  len <- length(interval)
+  interval[1] <- (-Inf)
+  interval[len] <- (+Inf)
+  p_for_dots <- pnorm(interval, mean=mean(dots$gray), sd=sd(dots$gray))
+  p_for_dots <- (p_for_dots[2:len] - p_for_dots[1:(len - 1)])
+  
+  chisq.test(dots$hist$counts, p = p_for_dots)
+}
+
+chi1 <- chi_test(conv1)
+message("Chi square for image 1: ", as.numeric(chi1$statistic), "; p = ", chi1$p.value)
+chi2 <- chi_test(conv2)
+message("Chi square for image 2: ", as.numeric(chi2$statistic), "; p = ", chi2$p.value)
