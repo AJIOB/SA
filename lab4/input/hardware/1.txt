@@ -1,0 +1,67 @@
+What is hardware?
+Webster's dictionary gives us the following definition of the hardware — the mechanical, magnetic, electronic, and electrical devices composing a computer system.
+
+
+Computer hardware can be divided into four categories:
+1) input hardware
+
+2) processing hardware
+
+3) storage hardware
+
+4) output hardware.
+
+
+Input hardware
+
+The purpose of the input hardware is to collect data and convert it into a form suitable for computer processing.
+The most common input device is a keyboard.
+It looks very much like a typewriter.
+The mouse is a hand held device connected to the computer by small cable.
+As the mouse is rolled across the mouse pad, the cursor moves across the screen.
+When the cursor reaches the desired location, the user usually pushes a button on the mouse once or twice to signal a menu selection or a command to the computer.
+
+
+The light pen uses a light sensitive photoelectric cell to signal screen position to the computer.
+Another type of input hardware is optic-electronic scanner that is used to input graphics as well as typeset characters.
+Microphone and video camera can be also used to input data into the computer.
+Electronic cameras are becoming very popular among the consumers for their relatively low price and convenience.
+
+
+Processing hardware
+
+The purpose of processing hardware is retrieve, interpret and direct the execution of software instructions provided to the computer.
+The most common components of processing hardware are the Central Processing Unit and main memory.
+
+
+The Central Processing Unit (CPU) is the brain of the computer.
+It reads and interprets software instructions and coordinates the processing activities that must take place.
+The design of the CPU affects the processing power and the speed of the computer, as well as the amount of main memory it can use effectively.
+With a well-designed CPU in your computer, you can perform highly sophisticated tasks in a very short time.
+
+
+Memory is the system of component of the computer in which information is stored.
+There are two types of computer memory: RAM and ROM.
+
+RAM (random access memory) is the volatile computer memory, used for creating loading, and running pro-grams and for manipulating and temporarily storing data;
+
+ROM (read only memory) is nonvolatile, non-modifiable computer memory, used to hold programmed instructions to the system.
+
+The more memory you have in your computer, the more operations you can perform.
+
+
+Storage hardware
+
+The purpose of storage hardware is to store computer instructions and data in a form that is relatively permanent and retrieve when needed for processing.
+Storage hardware serves the same basic functions as do office filing systems except that it stores data as electromagnetic signals.
+The most common ways of storing data are Hard disk, floppy disk and CD-ROM.
+
+Hard disk is a rigid disk coated with magnetic material, for storing programs and relatively large amounts of data.
+
+Floppy disk (diskette) - thin, usually flexible plastic disk coated with magnetic material, for storing computer data and programs.
+There are two formats for floppy disks: 5.25" and 3.5".
+5.25" is not used in modern computer systems because of it relatively large size flexibility and small capacity.
+3.5" disks are formatted 1.4 megabytes and are widely used.
+
+CD-ROM (compact disc read only memory) is a com¬pact disc on which a large amount of digitized read-only data can be stored.
+CD-ROMs are very popular now be¬cause of the growing speed which CD-ROM drives can provide nowadays.
