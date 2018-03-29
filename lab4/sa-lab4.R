@@ -39,7 +39,7 @@ load_texts <- function(group_name, file_names)
   text
 }
 
-get_thesaurus <- function(text)
+parse_freqs <- function(text)
 {
   # Load the data as a corpus
   docs <- Corpus(VectorSource(text))
@@ -61,9 +61,18 @@ get_thesaurus <- function(text)
   dtm <- TermDocumentMatrix(docs)
   m <- as.matrix(dtm)
   v <- sort(rowSums(m),decreasing=TRUE)
-  d <- data.frame(word = names(v),freq=v)
-  head(d, thesaurus_size)$word
+  data.frame(word = names(v),freq=v)
 }
 
-test <- load_texts(group1, c("1", "2", "3"))
-q <- get_thesaurus(test)
+get_thesaurus <- function(group_name, file_names)
+{
+  text <- load_texts(group_name, file_names)
+  th <- parse_freqs(text)
+  top <- head(th, thesaurus_size)
+  factor(top$word)
+}
+
+voc <- NULL
+voc$th1 <- get_thesaurus(group1, c("1", "2", "3"))
+voc$th2 <- get_thesaurus(group2, c("6", "7", "8"))
+voc$th3 <- get_thesaurus(group3, c("11", "12", "13"))
