@@ -12,9 +12,9 @@ folder_delim <- "/"
 input_folder <- "input"
 file_extension <- ".txt"
 
-group1 <- "hardware"
-group2 <- "programming"
-group3 <- "economics"
+group1 <- list(name = "hardware", trade = c("1", "2", "3"), test = c("4", "5"))
+group2 <- list(name = "programming", trade = c("6", "7", "8"), test = c("9", "10"))
+group3 <- list(name = "economics", trade = c("11", "12", "13"), test = c("14", "15"))
 
 thesaurus_size = 60
 
@@ -64,18 +64,18 @@ parse_freqs <- function(text)
   data.frame(word = names(v),freq=v)
 }
 
-get_thesaurus <- function(group_name, file_names)
+get_thesaurus <- function(group)
 {
-  text <- load_texts(group_name, file_names)
+  text <- load_texts(group$name, group$trade)
   th <- parse_freqs(text)
   top <- head(th, thesaurus_size)
   as.vector(top$word)
 }
 
 voc <- NULL
-voc$th1 <- get_thesaurus(group1, c("1", "2", "3"))
-voc$th2 <- get_thesaurus(group2, c("6", "7", "8"))
-voc$th3 <- get_thesaurus(group3, c("11", "12", "13"))
+voc$th1 <- get_thesaurus(group1)
+voc$th2 <- get_thesaurus(group2)
+voc$th3 <- get_thesaurus(group3)
 
 calc_hits_in_voc <- function(thesuarus, spec_text)
 {
@@ -83,7 +83,7 @@ calc_hits_in_voc <- function(thesuarus, spec_text)
   sum(data_frame$freq)
 }
 
-text <- load_text(group1, "1")
+text <- load_text(group1$name, "1")
 freqs <- parse_freqs(text)
 
 test_num <- calc_hits_in_voc(voc$th1, freqs)
