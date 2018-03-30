@@ -114,12 +114,37 @@ test_matrix <- get_named_matrix(
   c(group1$test, group2$test, group3$test)
 )
 
-# input:  one column - one group
+# input:  one column - one group (columns must be named)
 # output: one column - one thesaurus
 get_hit_matrix <- function(group_matrix)
 {
-  # TODO
-  hits <- get_hit_vector(group1$name, "1")
+  res <- NULL
+
+  for(col_name in colnames(group_matrix))
+  {
+    col <- group_matrix[, col_name]
+    
+    hits <- foreach (i = col) %do% {
+      get_hit_vector(col_name, i)
+    }
+    
+    hits <- unlist(hits)
+    
+    hits_matrix <- matrix(
+      hits, 
+      ncol = 3,
+      byrow = TRUE
+    )
+    
+    dimnames(hits_matrix) <- list(
+      paste(col_name, col, sep = " "),         # row names 
+      c("th1", "th2", "th3")  # column names 
+    )
+    
+    res <- rbind(res, hits_matrix)
+  }
+  
+  res
 }
 
 t <- get_hit_matrix(trade_matrix)
