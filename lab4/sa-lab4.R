@@ -124,7 +124,7 @@ get_hit_matrix <- function(group_matrix)
   {
     col <- group_matrix[, col_name]
     
-    hits <- foreach (i = col) %do% {
+    hits <- foreach (i = col) %dopar% {
       get_hit_vector(col_name, i)
     }
     
@@ -154,16 +154,36 @@ calc_kmeans <- function(matrix)
   kmeans(trade, 3)
 }
 
+calc_centers <- function(hit_matrix, centers)
+{
+  hits <- foreach (row_name = rownames(hit_matrix)) %dopar% 
+  {
+    row <- hit_matrix[row_name, ]
+    
+    temp_centers <- t(centers)
+    sums <- colSums(temp_centers * row)
+    
+    which.max(sums)
+  }
+  
+  hits <- array(unlist(hits))
+  dimnames(hits) <- list(rownames(hit_matrix))
+  
+  hits
+}
+
 message("------------------------------------------")
 message("------------------TRADING-----------------")
 
 means <- calc_kmeans(trade_matrix)
-vectors <- means$centers
+centers <- means$centers
 print(means$cluster)
 
 message("------------------------------------------")
 message("------------------TESTING-----------------")
 
 test <- get_hit_matrix(test_matrix)
+test_centers <- calc_centers(test, centers)
+print(test_centers)
 
 message("------------------------------------------")
