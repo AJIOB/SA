@@ -3,10 +3,6 @@ setwd("D:/labs/SA/lab4/")
 
 # Install from CRAN
 library("tm")
-library("SnowballC")
-library("wordcloud")
-library("RColorBrewer")
-
 library("foreach")
 
 folder_delim <- "/"
@@ -96,4 +92,34 @@ get_hit_vector <- function(group_name, text_name)
   unlist(test_num)
 }
 
-hits <- get_hit_vector(group1$name, "1")
+get_named_matrix <- function(values)
+{
+  A <- matrix(
+    values,
+    ncol = 3,
+    byrow = FALSE)
+  
+  dimnames(A) <- list(
+    NULL,         # row names 
+    c(group1$name, group2$name, group3$name)  # column names 
+  )
+  A
+}
+
+trade_matrix <- get_named_matrix(
+  c(group1$trade, group2$trade, group3$trade)
+)
+
+test_matrix <- get_named_matrix(
+  c(group1$test, group2$test, group3$test)
+)
+
+# input:  one column - one group
+# output: one column - one thesaurus
+get_hit_matrix <- function(group_matrix)
+{
+  # TODO
+  hits <- get_hit_vector(group1$name, "1")
+}
+
+t <- get_hit_matrix(trade_matrix)
