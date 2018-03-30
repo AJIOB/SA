@@ -147,4 +147,23 @@ get_hit_matrix <- function(group_matrix)
   res
 }
 
-t <- get_hit_matrix(trade_matrix)
+# matrix - trade or test matrix
+calc_kmeans <- function(matrix)
+{
+  trade <- get_hit_matrix(matrix)
+  kmeans(trade, 3)
+}
+
+message("------------------------------------------")
+message("------------------TRADING-----------------")
+
+means <- calc_kmeans(trade_matrix)
+vectors <- means$centers
+print(means$cluster)
+
+message("------------------------------------------")
+message("------------------TESTING-----------------")
+
+test <- get_hit_matrix(test_matrix)
+
+message("------------------------------------------")
