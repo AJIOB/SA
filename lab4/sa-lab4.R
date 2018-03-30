@@ -69,10 +69,21 @@ get_thesaurus <- function(group_name, file_names)
   text <- load_texts(group_name, file_names)
   th <- parse_freqs(text)
   top <- head(th, thesaurus_size)
-  factor(top$word)
+  as.vector(top$word)
 }
 
 voc <- NULL
 voc$th1 <- get_thesaurus(group1, c("1", "2", "3"))
 voc$th2 <- get_thesaurus(group2, c("6", "7", "8"))
 voc$th3 <- get_thesaurus(group3, c("11", "12", "13"))
+
+calc_hits_in_voc <- function(thesuarus, spec_text)
+{
+  data_frame <- spec_text[spec_text$word %in% thesuarus,]
+  sum(data_frame$freq)
+}
+
+text <- load_text(group1, "1")
+freqs <- parse_freqs(text)
+
+test_num <- calc_hits_in_voc(voc$th1, freqs)
