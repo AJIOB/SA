@@ -7,6 +7,8 @@ library("SnowballC")
 library("wordcloud")
 library("RColorBrewer")
 
+library("foreach")
+
 folder_delim <- "/"
 
 input_folder <- "input"
@@ -83,7 +85,15 @@ calc_hits_in_voc <- function(thesuarus, spec_text)
   sum(data_frame$freq)
 }
 
-text <- load_text(group1$name, "1")
-freqs <- parse_freqs(text)
+get_hit_vector <- function(group_name, text_name)
+{
+  text <- load_text(group_name, text_name)
+  freqs <- parse_freqs(text)
 
-test_num <- calc_hits_in_voc(voc$th1, freqs)
+  test_num <- foreach (x = voc) %do% { 
+    calc_hits_in_voc(x, freqs) 
+    }
+  unlist(test_num)
+}
+
+hits <- get_hit_vector(group1$name, "1")
